@@ -63,7 +63,6 @@ export const GamePage = () => {
             socket.off('game_finished')
             socket.off('disconnected')
             socket.off('opponent_made_choice')
-            socket.off('connected')
         })
     }, [socket, players])
     return (
