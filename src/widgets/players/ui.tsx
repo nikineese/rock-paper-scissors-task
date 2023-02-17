@@ -2,17 +2,11 @@ import {PlayerCard, PlayerCardWrapper, PlayerInfo, PlayersWrapper} from "./style
 import {useStore} from "effector-react";
 import {scoreModel, userModel, elementModel} from '../../entities'
 import {GameType} from "shared/api";
-import {socketApi} from 'shared/api'
 
 export const Players = ({ players, results, opponentStatus }: { players: string[], results: GameType[], opponentStatus: string }) => {
-    const socket = useStore(socketApi.$socket)
     const score = useStore(scoreModel.$score)
     const user = useStore(userModel.$user)
     const choice = useStore(elementModel.$choice)
-
-    if (socket && players.length <= 0) {
-        return <p>Server is full, pls try again later</p>
-    }
 
     return (
         <PlayersWrapper>

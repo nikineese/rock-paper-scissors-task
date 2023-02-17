@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {StatusType} from "shared/lib/enums";
 import {Controls, Players} from "../../widgets";
 import {GamePageWrapper} from "./styled";
+import {Button} from "shared/lib/ui";
 
 export const GamePage = () => {
     const navigate = useNavigate()
@@ -67,8 +68,17 @@ export const GamePage = () => {
     }, [socket, players])
     return (
         <GamePageWrapper>
-            <Players players={players} results={results} opponentStatus={opponentStatus} />
-            <Controls winner={winner} handleStartAgain={() => handlePlayersReceived(socket)} disabled={!!winner || players.length < 2} />
+            {socket && players.length <= 0 ? (
+                <>
+                    <p>Server is full, pls try again later</p>
+                    <Button onClick={() => window.location.reload()}>Leave</Button>
+                </>
+            ) : (
+                <>
+                    <Players players={players} results={results} opponentStatus={opponentStatus} />
+                    <Controls winner={winner} handleStartAgain={() => handlePlayersReceived(socket)} disabled={!!winner || players.length < 2} />
+                </>
+            )}
         </GamePageWrapper>
     )
 }
