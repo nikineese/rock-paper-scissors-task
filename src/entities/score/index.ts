@@ -1,1 +1,1 @@
-export * as scoreModel from './score'
+export * as scoreModel from './model'

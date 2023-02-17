@@ -1,1 +1,1 @@
-export * as elementModel from './element'
+export * as elementModel from './model'
