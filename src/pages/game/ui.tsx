@@ -1,10 +1,9 @@
 import { useEvent, useStore } from "effector-react";
 import { socketApi } from "shared/api";
-import { scoreModel } from "../../entities";
+import { scoreModel, StatusType } from "../../entities";
 import { useEffect } from "react";
 import * as model from "./model";
 import { useNavigate } from "react-router-dom";
-import { StatusType } from "shared/lib/enums";
 import { Controls, Players } from "../../widgets";
 import { GamePageWrapper } from "./styled";
 import { Button } from "shared/lib/ui";

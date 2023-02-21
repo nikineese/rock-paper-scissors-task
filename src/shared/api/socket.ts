@@ -1,22 +1,23 @@
-import {createEffect, createEvent, createStore, sample} from "effector";
-import {io, Socket} from "socket.io-client";
+import { createEffect, createEvent, createStore, sample } from "effector";
+import { io, Socket } from "socket.io-client";
 
 export const connectUserFx = createEffect((username: string) => {
-    if (!username) throw { name: 'USERNAME_INVALID', message: 'Please enter valid username' }
-    const socket = io("http://localhost:4000", {
-        query: {
-            "username": username,
-        }
-    })
-    localStorage.setItem('username', username)
-    return socket
-})
-export const userConnected = createEvent<string>()
-export const opponentDisconnected = createEvent()
+  if (!username) throw new Error("Please enter valid username");
+  return io("http://localhost:4000", {
+    query: {
+      username: username,
+    },
+  });
+});
+export const userConnected = createEvent<string>();
+export const opponentDisconnected = createEvent();
 
-export const $socket = createStore<Socket | null>(null).on(connectUserFx.doneData, (_, socket) => socket)
+export const $socket = createStore<Socket | null>(null).on(
+  connectUserFx.doneData,
+  (_, socket) => socket
+);
 
 sample({
-    clock: userConnected,
-    target: connectUserFx,
-})
+  clock: userConnected,
+  target: connectUserFx,
+});
